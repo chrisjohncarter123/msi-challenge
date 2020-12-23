@@ -1,24 +1,27 @@
 
 function onClick(){
+
+    var userInput = document.getElementById("userInput").value
+
+    var inputObject = inputToObject(userInput)
+
+    display(userInput)
+
+}
+
+function inputToObject (userInput){
+
     
 
 }
 
-function inputToObject (input){
-
-
-}
-
-function calculate(){
+function display(nodesObject){
+    
     var resultDiv = document.getElementById("result");
 
-    var userInput = document.getElementById("userInput").value
-
-    var nodes = userInput.split("|")
-
     var resultHTML = ""
-
     var coutner = 0
+    var nodes = nodesObject.split("|")
 
     nodes.forEach(element => {
 
