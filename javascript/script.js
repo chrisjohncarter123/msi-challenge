@@ -28,7 +28,13 @@ class Tree{
         var resultHTML = ""
 
         this.nodes.forEach(element => {
-            resultHTML += "<div class='node'></div>"
+            resultHTML += "<div class='node'>"
+            
+            resultHTML += "<p>Parent ID: " + element.parent_id + "</p>"
+            resultHTML += "<p>Node ID: " + element.node_id + "</p>"
+            resultHTML += "<p>Node Name: " + element.node_name + "</p>"
+            
+            resultHTML += "</div>"
         });
 
         resultDiv.innerHTML = resultHTML
