@@ -11,7 +11,25 @@ function onClick(){
 
 function inputToObject (userInput){
 
-    
+    var nodes = userInput.split("|")
+
+    var result = []
+
+    nodes.forEach(element => {
+        var values = element.split(",")
+
+        result.push(
+        {
+            "parent_id":values[0],
+            "node_id":values[1],
+            "node_name":values[2]
+        })
+    })
+
+
+    //console.log(result)
+
+    return result
 
 }
 
