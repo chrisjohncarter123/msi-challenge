@@ -18,14 +18,16 @@ body {
 }
 
 .node>ul{
-    position: absolute;
-    top: 25%;
-    left: 5%;
     
     list-style-type: none;
     margin: 0;
     padding: 0;
     border: 1px solid green;
+    height: 100%;
+}
+
+.node>ul>li{
+    text-align: center;
 }
 
 .nodeItem{

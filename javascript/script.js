@@ -2,7 +2,7 @@ function onClick(){
 
     var userInput = document.getElementById("userInput").value
 
-    var tree = new Tree("null,0,grandpa|0,1,son|0,2,daugther|1,3,grandkid|1,4,grandkid|2,5,grandkid|5,6,greatgrandkid")
+    var tree = new Tree("null,0,grandpa|0,1,son|0,2,daugther")
 
     console.log(tree)
 
@@ -28,7 +28,11 @@ class Tree{
         var resultHTML = ""
 
         this.nodes.forEach(element => {
-            resultHTML += "<div class='node'>"
+
+            var x = element.node_id * 50;
+            var y = element.parent_id * 50;
+
+            resultHTML += "<div style = " + "'left:" + x + "px; top:" + y + "px;'" + "class='node'>"
                 resultHTML += "<ul>"
                     resultHTML += "<li class='nodeItem' >Parent ID: " + element.parent_id + "</li>"
                     resultHTML += "<li class='nodeItem' >Node ID: " + element.node_id + "</li>"
