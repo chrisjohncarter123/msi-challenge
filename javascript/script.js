@@ -18,7 +18,7 @@ class Tree{
         userInputNodes.forEach(element => {
             var values = element.split(",")
 
-            addNode(new Node(values[0],values[1],values[2]))
+            this.addNode(new Node(values[0],values[1],values[2]))
 
 
         })
