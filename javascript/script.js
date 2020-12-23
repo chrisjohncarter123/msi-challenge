@@ -28,6 +28,18 @@ class Tree{
         var resultHTML = ""
 
         this.nodes.forEach(element => {
+            
+        });
+
+        resultDiv.innerHTML = resultHTML
+    }
+
+    displayList() {
+        var resultDiv = document.getElementById("result");
+
+        var resultHTML = ""
+
+        this.nodes.forEach(element => {
             resultHTML += "<p>"
             resultHTML += "<p>parent_id - " + element.parent_id + "</p>"
             resultHTML += "<p>node_id - " + element.node_id + "</p>"
