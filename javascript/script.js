@@ -18,11 +18,22 @@ class Tree{
         userInputNodes.forEach(element => {
             var values = element.split(",")
 
-            var parent_id = parseInt(values[0])
+
+            var parent_id = null
+            if(values[0] != "null"){
+                parent_id = parseInt(values[0])
+            }
             var node_id = parseInt(values[1])
             var node_name = values[2]
 
-            this.addNode(new Node( parent_id, node_id, node_name))
+            
+            var newNode = new Node(parent_id, node_id, node_name)
+
+            console.log(newNode)
+
+            this.addNode(newNode)
+
+            
 
         })
     }
@@ -30,11 +41,11 @@ class Tree{
     addNode(newNode){
         this.nodes.push(newNode)
 
-
-        var parentNode = this.nodes.find(node => newNode.parent_id == node.node_id)
-
-        console.log(parentNode)
-        parentNode.addChild(newNode)
+        if(newNode.hasParent){
+            var parentNode = this.nodes.find(node => newNode.parent_id == node.node_id)
+            
+            parentNode.addChild(newNode)
+        }
     }
 
     display() {
@@ -83,15 +94,21 @@ class Tree{
 
 class Node{
     constructor(parent_id, node_id, node_name){
-        this.parent_id = parent_id;
-        this.node_id = node_id;
-        this.node_name = node_name;
+
+        this.hasParent = parent_id != null
+        this.parent_id = parent_id
+        this.node_id = node_id
+        this.node_name = node_name
 
         this.children = []
     }
 
     addChild(newChild){
         this.children.push(newChild)
+    }
+
+    hasParent(){
+        return this.hasParent
     }
 
 }
