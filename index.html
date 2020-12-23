@@ -2,29 +2,30 @@
 <html>
 <body>
 
-<h1>Assessment Challenge</h1>
-<p>
-    Please input a string that has pipe delimited nodes that represent family members in a family tree. Each node
-    is a CSV with the values being &quot;parent_id, node_id, node_name&quot;. 
-</p>
+    <h1>Assessment Challenge</h1>
+    <p>
+        Please input a string that has pipe delimited nodes that represent family members in a family tree. Each node
+        is a CSV with the values being &quot;parent_id, node_id, node_name&quot;. 
+    </p>
 
-<p>
-    The program will display a single result that represents the data as a hierarchy (root, children, siblings, etc).
-</p>
+    <p>
+        The program will display a single result that represents the data as a hierarchy (root, children, siblings, etc).
+    </p>
 
-<p>
     <h4>Sample input:</h4>
-    &quot;null,0,grandpa|0,1,son|0,2,daugther|1,3,grandkid|1,4,grandkid|2,5,grandkid|5,6,greatgrandkid&quot;
-</p>
+    <p>
+        &quot;null,0,grandpa|0,1,son|0,2,daugther|1,3,grandkid|1,4,grandkid|2,5,grandkid|5,6,greatgrandkid&quot;
+    </p>
 
+    <h4>Input:</h4>
 
-<h4>Input:</h4>
+    <input type="text" id="userInput">
+    <button onclick="calculate()">Submit</button>
 
-<input type="text" name="input" required>
-<button onclick="calculate()">Submit</button>
+    <div id="error"></div>
 
-<h4>Result:</h4>
-<div id="result"></div>
+    <h4>Result:</h4>
+    <div id="result"></div>
 
 </body>
 <script src="javascript/script.js"></script>
