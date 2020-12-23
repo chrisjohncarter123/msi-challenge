@@ -12,7 +12,15 @@ function calculate(){
     var coutner = 0
 
     nodes.forEach(element => {
-        resultHTML += "<p>Node " + ++coutner + ": " + element + "</p>"
+
+        resultHTML += "<p>Node " + coutner++ + ":"
+
+        var items = element.split(",")
+
+        resultHTML += "<p>parent_id - " + items[0] + "</p>"
+        resultHTML += "<p>node_id - " + items[1] + "</p>"
+        resultHTML += "<p>node_name - " + items[2] + "</p>"
+        
     });
 
     resultDiv.innerHTML = resultHTML
