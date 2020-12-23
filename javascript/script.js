@@ -1,4 +1,13 @@
 
+function onClick(){
+    
+
+}
+
+function inputToObject (input){
+
+
+}
 
 function calculate(){
     var resultDiv = document.getElementById("result");
