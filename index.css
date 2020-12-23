@@ -8,10 +8,29 @@ body {
 
 .node{
     background-color: cyan;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
     margin: auto;
     border: 3px solid black;
-    padding: 10px;
+    position: relative;
+    
+}
+
+.node>ul{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid green;
+}
+
+.nodeItem{
+    
+    
+    border: 1px solid red;
+
 }
