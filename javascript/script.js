@@ -18,8 +18,15 @@ class Tree{
         userInputNodes.forEach(element => {
             var values = element.split(",")
 
-            this.nodes.push(new Node(values[0],values[1],values[2]))
+            addNode(new Node(values[0],values[1],values[2]))
+
+
         })
+    }
+
+    addNode(node){
+        this.nodes.push(node)
+
     }
 
     display() {
@@ -71,5 +78,12 @@ class Node{
         this.parent_id = parent_id;
         this.node_id = node_id;
         this.node_name = node_name;
+
+        this.children = []
     }
+
+    addChild(child){
+        this.children.push(child)
+    }
+
 }
