@@ -29,8 +29,13 @@ class Tree{
 
         this.nodes.forEach(element => {
 
-            var x = element.node_id * 50;
-            var y = element.parent_id * 50;
+            var y = 0;
+            if(element.parent_id != "null"){
+                y = (parseInt(element.parent_id) * 50) + 200;
+                
+            }
+            var x = parseInt(element.node_id) * 200;
+            
 
             resultHTML += "<div style = " + "'left:" + x + "px; top:" + y + "px;'" + "class='node'>"
                 resultHTML += "<ul>"

@@ -11,9 +11,9 @@ body {
     height: 200px;
     width: 200px;
     border-radius: 50%;
-    margin: auto;
+
     border: 3px solid black;
-    position: relative;
+    position: absolute;
     
 }
 
