@@ -2,10 +2,18 @@ body {
     background-color: lightblue;
 }
 
+#result{
+    width: 100%;
+}
+
 .node{
-    background-color: green;
-    height: 25px;
-    width: 25px;
+    background-color: cyan;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
-    display: inline-block;
+
+
+    margin: auto;
+    border: 3px solid black;
+    padding: 10px;
 }
