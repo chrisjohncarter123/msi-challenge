@@ -6,7 +6,7 @@ function onClick(){
 
     console.log(tree)
 
-   // tree.display()
+    tree.display()
 
 }
 
@@ -28,15 +28,11 @@ class Tree{
         var resultHTML = ""
 
         this.nodes.forEach(element => {
-
-            resultHTML += "<p>Node " + coutner++ + ":"
-
-            var items = element.split(",")
-
-            resultHTML += "<p>parent_id - " + items[0] + "</p>"
-            resultHTML += "<p>node_id - " + items[1] + "</p>"
-            resultHTML += "<p>node_name - " + items[2] + "</p>"
-            
+            resultHTML += "<p>"
+            resultHTML += "<p>parent_id - " + element.parent_id + "</p>"
+            resultHTML += "<p>node_id - " + element.node_id + "</p>"
+            resultHTML += "<p>node_name - " + element.node_name + "</p>"
+            resultHTML += "</p>"
         });
 
         resultDiv.innerHTML = resultHTML
