@@ -54,12 +54,8 @@ class Node{
 
         Node.allNodes.forEach(element => {
 
-            var y = 0;
-            if(element.hasParent){
-                y = ((parseInt(element.parent_id)) + 1) * 250;
-                
-            }
-            var x = (parseInt(element.node_id) * 200);
+            var y = element.getYPos()
+            var x = (parseInt(element.node_id) * 200)
             
 
             resultHTML += "<div style = " + "'left:" + x + "px; top:" + y + "px;'" + "class='node'>"
@@ -107,7 +103,7 @@ class Node{
             return 0;
         }
         else {
-            return t
+            return this.parent.getYPos() + 200
         }
     }
 
