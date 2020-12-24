@@ -12,11 +12,10 @@ class Node{
 
     static allNodes = []
 
-    static errorCheck(userInput){
+    static formatErrorCheck(userInput){
         //https://regex101.com/codegen?language=javascript
-        const regex = /((((NULL)|(null)|([0-9]+)),[0-9]+,[a-zA-Z]+)\|)+(((NULL)|(null)|([0-9]+)),[0-9]+,[a-zA-Z]+)/gm;
+        const regex = /((((NULL)|(null)|([0-9]+)),[0-9]+,[a-zA-Z]+)\|)+(((NULL)|(null)|([0-9]+)),[0-9]+,[a-zA-Z]+)|(((NULL)|(null)),[0-9]+,[a-zA-Z]+)/gm;
         let m = regex.exec(userInput);
-        console.log(m)
 
         if(m != null && m.length > 0 && m[0] == userInput){
             return true
@@ -27,20 +26,49 @@ class Node{
         
     }
 
+    static idDuplicationErrorCheck(userInputNodes){
+        
+
+    }
+
+    static nonexistentParentIdErrorCheck(userInputNodes){
+
+    }
+
     static initializeFromInput(userInput) {
+
+        this.allNodes = []
 
         //The input must match the regex, otherwise there is an error!
         if(!Node.errorCheck(userInput)){
-            document.getElementById("error").innerHTML = "Input Error!"
+            document.getElementById("error").innerHTML += "Input Format Error!"
         }
         else {
             document.getElementById("error").innerHTML = ""
 
             var userInputNodes = userInput.split("|")
+            
+
+            userInputNodes.forEach(element => {
+
+                if(!Node.idDuplicationErrorCheck(userInputNodes)){
+                    document.getElementById("error").innerHTML += "node_id Duplication Error!"
+
+                }
+
+                if(!Node.nonexistentParentIdErrorCheck(userInputNodes)){
+                    document.getElementById("error").innerHTML += "Nonexistent parent_id Error!"
+                    
+                }
+            })
+
+
+            //Passed all error checks
             this.nodes = []
 
             userInputNodes.forEach(element => {
-                var values = element.split(",")
+
+                values = element.split(",")
 
                 var parent_id = null
                 if(values[0] != "null"){
@@ -55,6 +83,8 @@ class Node{
     }
 
     static displayList() {
+        document.getElementById("result").innerHTML = "";
+
         var resultDiv = document.getElementById("result");
 
         var resultHTML = ""
@@ -70,6 +100,8 @@ class Node{
         resultDiv.innerHTML = resultHTML
     }
     static display() {
+        document.getElementById("result").innerHTML = "";
+
         var resultDiv = document.getElementById("result");
 
         var resultHTML = ""
