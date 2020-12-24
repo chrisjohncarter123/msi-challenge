@@ -12,7 +12,7 @@ function onClick(){
 
 class Node{
 
-    static allNodes = {}
+    static allNodes = []
 
     static initializeFromInput(userInput) {
         var userInputNodes = userInput.split("|")
@@ -29,8 +29,6 @@ class Node{
             var node_name = values[2]
             
             var newNode = new Node(parent_id, node_id, node_name)
-
-            this.addNode(newNode)
         })
     }
 
@@ -86,7 +84,7 @@ class Node{
 
         if(this.hasParent){
             this.parent = Node.allNodes.find(node => this.parent_id == node.node_id)
-            parent.addChild(newNode)
+            this.parent.addChild(this)
         }
         else{
             this.parent = null;
