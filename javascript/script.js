@@ -2,6 +2,8 @@ function onClick(){
 
     var userInput = document.getElementById("userInput").value
 
+    document.getElementById("error").innerHTML = ""
+
     Node.initializeFromInput(userInput)
 
     Node.display()
@@ -26,37 +28,62 @@ class Node{
         
     }
 
+
     static idDuplicationErrorCheck(userInputNodes){
-        var ids = []
+        var node_ids = []
+        var result = true;
+
         userInputNodes.forEach(element => {
-            var values = element.split(",")
-            var id = values[1]
 
-            ids.push(id)
-                
+            var element_node_id = element.split(",")[1]
+
+            if(node_ids.length == 0){
+                node_ids.push(element_node_id)
+            }
+            else{
+
+                var find_result = node_ids.find(x => x == element_node_id)
+
+                if(find_result == undefined){
+
+                    node_ids.push(element.split(",")[1])
+                    
+                }
+                else {
+                    result = false
+                    
+                }
+            }
+
         })
+    
+        return result
         
-
     }
 
     static nonexistentParentIdErrorCheck(userInputNodes){
+        var result = true
         var parent_ids = []
         userInputNodes.forEach(element => {
-            values = element.split(",")
-            parent_id = values[0]
 
-            parent_ids.push(parent_id)
+            parent_ids.push(element.split(",")[1])
                 
         })
 
-        userInputNodes.forEach(element => {
-            if(parent_ids.find(parent_id => parent_id == element.split(",")[1]) == null){
-                return false
+        var i;
+        for (i = 1; i < userInputNodes.length; i++) {
+            var element_parent_id = userInputNodes[i].split(",")[0]
+
+            var find_result = parent_ids.find(x => x == element_parent_id)
+
+            if(find_result == undefined){
+
+                result = false
+                
             }
-                
-        })
+        }
 
-        return true;
+        return result
 
     }
 
@@ -65,44 +92,44 @@ class Node{
         this.allNodes = []
 
         //The input must match the regex, otherwise there is an error!
-        if(!Node.errorCheck(userInput)){
+        if(!Node.formatErrorCheck(userInput)){
             document.getElementById("error").innerHTML += "Input Format Error!"
         }
         else {
-            document.getElementById("error").innerHTML = ""
-
+            
             var userInputNodes = userInput.split("|")
-
-            
-            
 
             if(!Node.idDuplicationErrorCheck(userInputNodes)){
                 document.getElementById("error").innerHTML += "node_id Duplication Error!"
                 
-
             }
 
-            if(!Node.nonexistentParentIdErrorCheck(userInputNodes)){
+            else if(!Node.nonexistentParentIdErrorCheck(userInputNodes)){
                 document.getElementById("error").innerHTML += "Nonexistent parent_id Error!"
                 
             }
 
+            else{
 
+                //Passed all error checks
 
-            //Passed all error checks
-            this.nodes = []
+                this.nodes = []
 
-            userInputNodes.forEach(element => {
+                userInputNodes.forEach(element => {
 
-                var parent_id = null
-                if(values[0] != "null"){
-                    parent_id = parseInt(values[0])
-                }
-                var node_id = parseInt(values[1])
-                var node_name = values[2]
-                
-                var newNode = new Node(parent_id, node_id, node_name)
-            })
+                    var values = element.split(",")
+
+                    var parent_id = null
+                    if(values[0] != "null"){
+                        parent_id = parseInt(values[0])
+                    }
+                    var node_id = parseInt(values[1])
+                    var node_name = values[2]
+                    
+                    var newNode = new Node(parent_id, node_id, node_name)
+                })
+
+            }
         }
     }
 
