@@ -2,9 +2,7 @@ function onClick(){
 
     var userInput = document.getElementById("userInput").value
 
-    Node.initializeFromInput("null,0,grandpa|0,1,son|0,2,daugther|1,3,grandkid|1,4,grandkid|2,5,grandkid|5,6,greatgrandkid"    )
-
-    console.log(Node.allNodes)
+    Node.initializeFromInput(userInput)
 
     Node.display()
 
@@ -14,22 +12,46 @@ class Node{
 
     static allNodes = []
 
+    static errorCheck(userInput){
+        //https://regex101.com/codegen?language=javascript
+        const regex = /((((NULL)|(null)|([0-9]+)),[0-9]+,[a-zA-Z]+)\|)+(((NULL)|(null)|([0-9]+)),[0-9]+,[a-zA-Z]+)/gm;
+        let m = regex.exec(userInput);
+        console.log(m)
+
+        if(m != null && m.length > 0 && m[0] == userInput){
+            return true
+        }
+
+        return false;
+        
+        
+    }
+
     static initializeFromInput(userInput) {
-        var userInputNodes = userInput.split("|")
-        this.nodes = []
 
-        userInputNodes.forEach(element => {
-            var values = element.split(",")
+        //The input must match the regex, otherwise there is an error!
+        if(!Node.errorCheck(userInput)){
+            document.getElementById("error").innerHTML = "Input Error!"
+        }
+        else {
+            document.getElementById("error").innerHTML = ""
 
-            var parent_id = null
-            if(values[0] != "null"){
-                parent_id = parseInt(values[0])
-            }
-            var node_id = parseInt(values[1])
-            var node_name = values[2]
-            
-            var newNode = new Node(parent_id, node_id, node_name)
-        })
+            var userInputNodes = userInput.split("|")
+            this.nodes = []
+
+            userInputNodes.forEach(element => {
+                var values = element.split(",")
+
+                var parent_id = null
+                if(values[0] != "null"){
+                    parent_id = parseInt(values[0])
+                }
+                var node_id = parseInt(values[1])
+                var node_name = values[2]
+                
+                var newNode = new Node(parent_id, node_id, node_name)
+            })
+        }
     }
 
     static displayList() {

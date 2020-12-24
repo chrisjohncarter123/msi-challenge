@@ -6,7 +6,9 @@ body {
     position: absolute;
 
 }
-
+#error{
+    color:red
+}
 .node{
     background-color: cyan;
     height: 150px;
