@@ -54,9 +54,8 @@ class Node{
 
         Node.allNodes.forEach(element => {
 
-            var y = element.getYPos()
-            var x = (parseInt(element.node_id) * 200)
-            
+            var x = element.getXPos()
+            var y = element.getYPos()  
 
             resultHTML += "<div style = " + "'left:" + x + "px; top:" + y + "px;'" + "class='node'>"
                 resultHTML += "<ul>"
@@ -81,6 +80,7 @@ class Node{
         if(this.hasParent){
             this.parent = Node.allNodes.find(node => this.parent_id == node.node_id)
             this.parent.addChild(this)
+            this.siblingIndex = this.parent.children.length - 1
         }
         else{
             this.parent = null;
@@ -97,7 +97,16 @@ class Node{
         return this.hasParent
     }
 
+    
+    getXPos(){
+        if(!this.hasParent){
+            return 0;
+        }
+        else {
+            return (this.siblingIndex * 200) - (this.parent.children.length * 100)
+        }
 
+    }
     getYPos(){
         if(!this.hasParent){
             return 0;
