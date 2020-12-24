@@ -57,13 +57,29 @@ class Node{
             var x = element.getXPos()
             var y = element.getYPos()  
 
+            if(element.hasParent){
+                var parent_x = element.parent.getXPos()
+                var parent_y = element.parent.getYPos()
+
+                
+                resultHTML += " <svg height='1000px' width='1000px'>"
+            
+                resultHTML += "<line x1='" + (x + 50) + "px' y1='" + (y + 50) + "px' x2='" + (parent_x + 50) + "px' y2='" + (parent_y + 50) + "px' style='stroke:rgb(0,0,255);stroke-width:5' />"
+                resultHTML += "</svg>"
+            }
+
+            
             resultHTML += "<div style = " + "'left:" + x + "px; top:" + y + "px;'" + "class='node'>"
+
                 resultHTML += "<ul>"
-                    resultHTML += "<li class='nodeItem' >Parent ID: " + element.parent_id + "</li>"
-                    resultHTML += "<li class='nodeItem' >Node ID: " + element.node_id + "</li>"
-                    resultHTML += "<li class='nodeItem' >Node Name: " + element.node_name + "</li>"
+                    resultHTML += "<li class='nodeItem' ><b>Parent ID:</b> " + element.parent_id + "</li>"
+                    resultHTML += "<li class='nodeItem' ><b>Node ID:</b> " + element.node_id + "</li>"
+                    resultHTML += "<li class='nodeItem' ><b>Node Name:</b> " + element.node_name + "</li>"
                 resultHTML += "</ul>"
+                
             resultHTML += "</div>"
+            
+
         });
 
         resultDiv.innerHTML = resultHTML
@@ -103,7 +119,17 @@ class Node{
             return 0;
         }
         else {
-            return (this.siblingIndex * 200) - (this.parent.children.length * 100)
+            if(this.siblingIndex == 0){
+                return this.parent.getXPos() + (200 * this.siblingIndex)
+            }
+            else {
+                if(this.parent.children[this.parent.children.length - 1 - this.siblingIndex]){
+                    return this.parent.getXPos() + (200 * this.siblingIndex) + this.parent.children[this.siblingIndex - 1].children.length * 200
+                }
+                else {
+                    return this.parent.getXPos() + (200 * this.siblingIndex)
+                }
+            }
         }
 
     }
@@ -115,5 +141,6 @@ class Node{
             return this.parent.getYPos() + 200
         }
     }
+
 
 }

@@ -3,17 +3,19 @@ body {
 }
 
 #result{
-    width: 100%;
+    position: absolute;
+
 }
 
 .node{
     background-color: cyan;
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    border-radius: 0%;
 
     border: 3px solid black;
     position: absolute;
+    z-index: 2;
     
 }
 
@@ -27,12 +29,21 @@ body {
 }
 
 .node>ul>li{
-    text-align: center;
+    text-align: left;
 }
 
 .nodeItem{
     
     
-    border: 1px solid red;
+
+
+}
+
+svg{
+    position: absolute;
+
+}
+
+line{
 
 }
