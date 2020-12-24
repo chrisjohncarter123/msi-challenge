@@ -2,16 +2,19 @@ function onClick(){
 
     var userInput = document.getElementById("userInput").value
 
-    var tree = new Tree("null,0,grandpa|0,1,son|0,2,daugther|1,3,grandkid|1,4,grandkid|2,5,grandkid|5,6,greatgrandkid"    )
+    Node.initializeFromInput("null,0,grandpa|0,1,son|0,2,daugther|1,3,grandkid|1,4,grandkid|2,5,grandkid|5,6,greatgrandkid"    )
 
-    console.log(tree)
+    console.log(Node.allNodes)
 
-    tree.display()
+    Node.display()
 
 }
 
-class Tree{
-    constructor(userInput){
+class Node{
+
+    static allNodes = {}
+
+    static initializeFromInput(userInput) {
         var userInputNodes = userInput.split("|")
         this.nodes = []
 
@@ -28,23 +31,25 @@ class Tree{
             var newNode = new Node(parent_id, node_id, node_name)
 
             this.addNode(newNode)
-
-            
-
         })
     }
 
-    addNode(newNode){
-        this.nodes.push(newNode)
+    static displayList() {
+        var resultDiv = document.getElementById("result");
 
-        if(newNode.hasParent){
-            var parentNode = this.nodes.find(node => newNode.parent_id == node.node_id)
-            
-            parentNode.addChild(newNode)
-        }
+        var resultHTML = ""
+
+        this.nodes.forEach(element => {
+            resultHTML += "<p>"
+            resultHTML += "<p>parent_id - " + element.parent_id + "</p>"
+            resultHTML += "<p>node_id - " + element.node_id + "</p>"
+            resultHTML += "<p>node_name - " + element.node_name + "</p>"
+            resultHTML += "</p>"
+        });
+
+        resultDiv.innerHTML = resultHTML
     }
-
-    display() {
+    static display() {
         var resultDiv = document.getElementById("result");
 
         var resultHTML = ""
@@ -70,25 +75,6 @@ class Tree{
 
         resultDiv.innerHTML = resultHTML
     }
-
-    displayList() {
-        var resultDiv = document.getElementById("result");
-
-        var resultHTML = ""
-
-        this.nodes.forEach(element => {
-            resultHTML += "<p>"
-            resultHTML += "<p>parent_id - " + element.parent_id + "</p>"
-            resultHTML += "<p>node_id - " + element.node_id + "</p>"
-            resultHTML += "<p>node_name - " + element.node_name + "</p>"
-            resultHTML += "</p>"
-        });
-
-        resultDiv.innerHTML = resultHTML
-    }
-}
-
-class Node{
     constructor(parent_id, node_id, node_name){
 
         this.hasParent = parent_id != null
@@ -97,6 +83,16 @@ class Node{
         this.node_name = node_name
 
         this.children = []
+
+        if(this.hasParent){
+            this.parent = Node.allNodes.find(node => this.parent_id == node.node_id)
+            parent.addChild(newNode)
+        }
+        else{
+            this.parent = null;
+        }
+
+        Node.allNodes.push(this)
     }
 
     addChild(newChild){
@@ -105,6 +101,16 @@ class Node{
 
     hasParent(){
         return this.hasParent
+    }
+
+
+    getYPos(){
+        if(!this.hasParent){
+            return 0;
+        }
+        else {
+            return t
+        }
     }
 
 }
