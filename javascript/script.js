@@ -37,7 +37,7 @@ class Node{
 
         var resultHTML = ""
 
-        this.nodes.forEach(element => {
+        Node.allNodes.forEach(element => {
             resultHTML += "<p>"
             resultHTML += "<p>parent_id - " + element.parent_id + "</p>"
             resultHTML += "<p>node_id - " + element.node_id + "</p>"
@@ -52,7 +52,7 @@ class Node{
 
         var resultHTML = ""
 
-        this.nodes.forEach(element => {
+        Node.allNodes.forEach(element => {
 
             var y = 0;
             if(element.hasParent){
