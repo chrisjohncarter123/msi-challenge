@@ -27,11 +27,36 @@ class Node{
     }
 
     static idDuplicationErrorCheck(userInputNodes){
+        var ids = []
+        userInputNodes.forEach(element => {
+            var values = element.split(",")
+            var id = values[1]
+
+            ids.push(id)
+                
+        })
         
 
     }
 
     static nonexistentParentIdErrorCheck(userInputNodes){
+        var parent_ids = []
+        userInputNodes.forEach(element => {
+            values = element.split(",")
+            parent_id = values[0]
+
+            parent_ids.push(parent_id)
+                
+        })
+
+        userInputNodes.forEach(element => {
+            if(parent_ids.find(parent_id => parent_id == element.split(",")[1]) == null){
+                return false
+            }
+                
+        })
+
+        return true;
 
     }
 
@@ -47,28 +72,27 @@ class Node{
             document.getElementById("error").innerHTML = ""
 
             var userInputNodes = userInput.split("|")
+
+            
             
 
-            userInputNodes.forEach(element => {
+            if(!Node.idDuplicationErrorCheck(userInputNodes)){
+                document.getElementById("error").innerHTML += "node_id Duplication Error!"
+                
 
-                if(!Node.idDuplicationErrorCheck(userInputNodes)){
-                    document.getElementById("error").innerHTML += "node_id Duplication Error!"
+            }
 
-                }
+            if(!Node.nonexistentParentIdErrorCheck(userInputNodes)){
+                document.getElementById("error").innerHTML += "Nonexistent parent_id Error!"
+                
+            }
 
-                if(!Node.nonexistentParentIdErrorCheck(userInputNodes)){
-                    document.getElementById("error").innerHTML += "Nonexistent parent_id Error!"
-                    
-                }
-            })
 
 
             //Passed all error checks
             this.nodes = []
 
             userInputNodes.forEach(element => {
-
-                values = element.split(",")
 
                 var parent_id = null
                 if(values[0] != "null"){
@@ -90,11 +114,11 @@ class Node{
         var resultHTML = ""
 
         Node.allNodes.forEach(element => {
-            resultHTML += "<p>"
+            resultHTML += "<div>"
             resultHTML += "<p>parent_id - " + element.parent_id + "</p>"
             resultHTML += "<p>node_id - " + element.node_id + "</p>"
             resultHTML += "<p>node_name - " + element.node_name + "</p>"
-            resultHTML += "</p>"
+            resultHTML += "</div>"
         });
 
         resultDiv.innerHTML = resultHTML
