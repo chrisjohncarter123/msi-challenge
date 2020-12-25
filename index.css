@@ -1,6 +1,9 @@
 body {
     background-color: lightblue;
 }
+#userInput{
+    width: 100%;
+}
 
 #result{
     position: absolute;

@@ -129,8 +129,17 @@ class Node{
                     var newNode = new Node(parent_id, node_id, node_name)
                 })
 
+                Node.calculatePositions()
+
             }
         }
+    }
+
+    static calculatePositions(){
+        Node.allNodes.forEach(node => {
+            
+        })
+
     }
 
     static displayList() {
@@ -189,6 +198,8 @@ class Node{
 
         resultDiv.innerHTML = resultHTML
     }
+
+
     constructor(parent_id, node_id, node_name){
 
         this.hasParent = parent_id != null
@@ -217,6 +228,8 @@ class Node{
     hasParent(){
         return this.hasParent
     }
+
+
 
     
     getXPos(){
