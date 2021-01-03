@@ -158,7 +158,11 @@ class Node{
 
         Node.allNodes.forEach(node => {
             if(node.children.length > 0){
-                node.xPosition += 150 * node.children.length
+                node.children.forEach(childNode => {
+                    childNode.xPosition += 400 * (childNode.siblingIndex)
+
+                })
+                
 
             }
                 
