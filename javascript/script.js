@@ -151,9 +151,19 @@ class Node{
             }
             else{
                 node.xPosition = node.parent.xPosition + (node.siblingIndex * nodeDistance)
-                node.yPosition = node.parent.yPosition + 1
+                node.yPosition = node.parent.yPosition + nodeDistance
             }
 
+        })
+
+        Node.allNodes.forEach(node => {
+            if(node.hasParent == true){
+                if(node.parent.children.Length > 0){
+                    node.xPosition += node.parent.children.Length * nodeDistance
+
+                }
+                
+            }
         })
 
         //Adjustment
