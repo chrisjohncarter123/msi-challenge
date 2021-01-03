@@ -10,7 +10,13 @@ function onClick(){
 
 }
 
+const nodeWidth = 100
+const nodeHeight = 100
+const nodeDistance = 200
+
 class Node{
+
+
 
     static allNodes = []
 
@@ -136,9 +142,42 @@ class Node{
     }
 
     static calculatePositions(){
+
+        //Set-up
         Node.allNodes.forEach(node => {
-            
+            if(!node.hasParent){
+                node.xPosition = 0
+                node.yPosition = 0
+            }
+            else{
+                node.xPosition = node.parent.xPosition + (node.siblingIndex * nodeDistance)
+                node.yPosition = node.parent.yPosition + 1
+            }
+
         })
+
+        //Adjustment
+        /*
+        Node.allNodes.forEach(node => {
+            node.allNodes.forEach(nodeB => {
+                if(nodeB.parent_id == node.node_id){
+                    if(nodeB.siblingIndex > node.siblingIndex){
+                        Node.allNodes(nodeC => {
+                            if(nodeC.parent_id == nodeB.node_id){
+                                node.allNodes(nodeD => {
+                                    if(nodeD.parent_id ==)
+
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+
+        })
+        */
+        
+        //TODO: center children to parents
 
     }
 
@@ -168,12 +207,14 @@ class Node{
 
         Node.allNodes.forEach(element => {
 
-            var x = element.getXPos()
-            var y = element.getYPos()  
+            var x = element.xPosition
+            var y = element.yPosition 
 
             if(element.hasParent){
-                var parent_x = element.parent.getXPos()
-                var parent_y = element.parent.getYPos()
+                //Draw line between parent and child nodes
+
+                var parent_x = element.parent.xPosition
+                var parent_y = element.parent.yPosition
 
                 
                 resultHTML += " <svg height='1000px' width='1000px'>"
@@ -206,6 +247,8 @@ class Node{
         this.parent_id = parent_id
         this.node_id = node_id
         this.node_name = node_name
+        this.xPosition = 0
+        this.yPosition = 0
 
         this.children = []
 
@@ -215,7 +258,8 @@ class Node{
             this.siblingIndex = this.parent.children.length - 1
         }
         else{
-            this.parent = null;
+            this.parent = null
+            this.siblingIndex = 0
         }
 
         Node.allNodes.push(this)
@@ -232,33 +276,7 @@ class Node{
 
 
     
-    getXPos(){
-        if(!this.hasParent){
-            return 0;
-        }
-        else {
-            if(this.siblingIndex == 0){
-                return this.parent.getXPos() + (200 * this.siblingIndex)
-            }
-            else {
-                if(this.parent.children[this.parent.children.length - 1 - this.siblingIndex]){
-                    return this.parent.getXPos() + (200 * this.siblingIndex) + this.parent.children[this.siblingIndex - 1].children.length * 200
-                }
-                else {
-                    return this.parent.getXPos() + (200 * this.siblingIndex)
-                }
-            }
-        }
-
-    }
-    getYPos(){
-        if(!this.hasParent){
-            return 0;
-        }
-        else {
-            return this.parent.getYPos() + 200
-        }
-    }
+    
 
 
 }
