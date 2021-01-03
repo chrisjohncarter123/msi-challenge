@@ -157,17 +157,11 @@ class Node{
         })
 
         Node.allNodes.forEach(node => {
-            if(node.hasParent == true){
-                console.log(node.parent)
-                console.log(node.parent.children.length)
-                if(node.parent.children.length > 0){
-                    
-                    node.xPosition += (node.parent.children.length) * nodeDistance
-                    
+            if(node.children.length > 0){
+                node.xPosition += 150 * node.children.length
 
-                }
-                
             }
+                
         })
 
         //Adjustment
