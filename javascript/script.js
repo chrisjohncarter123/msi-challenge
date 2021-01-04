@@ -167,27 +167,6 @@ class Node{
             }
                 
         })
-
-        //Adjustment
-        /*
-        Node.allNodes.forEach(node => {
-            node.allNodes.forEach(nodeB => {
-                if(nodeB.parent_id == node.node_id){
-                    if(nodeB.siblingIndex > node.siblingIndex){
-                        Node.allNodes(nodeC => {
-                            if(nodeC.parent_id == nodeB.node_id){
-                                node.allNodes(nodeD => {
-                                    if(nodeD.parent_id ==)
-
-                                })
-                            }
-                        })
-                    }
-                }
-            })
-
-        })
-        */
         
         //TODO: center children to parents
 
